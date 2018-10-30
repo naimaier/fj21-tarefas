@@ -69,7 +69,7 @@ public class JdbcTarefaDao {
 		}
 	}
 
-	public Tarefa getContato(Long id) {
+	public Tarefa getTarefa(Long id) {
 		String sql = "select * from tarefas where id=?";
 
 		try {
@@ -84,10 +84,12 @@ public class JdbcTarefaDao {
 				tarefa.setDescricao(rs.getString("descricao"));
 				tarefa.setFinalizado(rs.getBoolean("finalizado"));
 
-				// montando a data atraves do Calendar
-				Calendar data = Calendar.getInstance();
-				data.setTime(rs.getDate("dataFinalizacao"));
-				tarefa.setDataFinalizacao(data);
+				if (rs.getDate("dataFinalizacao") != null) {
+					// montando a data atraves do Calendar
+					Calendar data = Calendar.getInstance();
+					data.setTime(rs.getDate("dataFinalizacao"));
+					tarefa.setDataFinalizacao(data);
+				}
 			}
 			rs.close();
 			stmt.close();
@@ -98,14 +100,18 @@ public class JdbcTarefaDao {
 	}
 
 	public void altera(Tarefa tarefa) {
-		String sql = "update tarefas set descricao=?,finalizado=?,dataFinalizacao=?" + "where id=?";
+		String sql = "update tarefas set descricao=?,finalizado=?,dataFinalizacao=? where id=?";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, tarefa.getDescricao());
 			stmt.setBoolean(2, tarefa.isFinalizado());
-			stmt.setDate(4, new Date(tarefa.getDataFinalizacao().getTimeInMillis()));
-			stmt.setLong(5, tarefa.getId());
+			if (tarefa.getDataFinalizacao() != null) {
+				stmt.setDate(3, new Date(tarefa.getDataFinalizacao().getTimeInMillis()));
+			} else {
+				stmt.setNull(3, java.sql.Types.DATE);
+			}
+			stmt.setLong(4, tarefa.getId());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
