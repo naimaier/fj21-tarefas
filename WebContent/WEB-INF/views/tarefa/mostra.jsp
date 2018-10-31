@@ -1,14 +1,22 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="caelum"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Alterar tarefa</title>
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<script src="resources/js/jquery-ui.js"></script>
+<link href="resources/css/jquery-ui.css" rel="stylesheet">
+<link href="resources/css/jquery-ui.structure.css" rel="stylesheet">
+<link href="resources/css/jquery-ui.theme.css" rel="stylesheet">
 </head>
 <body>
-	<h3>Alterar tarefa - ${tarefa.id}</h3>
+	<fmt:formatDate value="${tarefa.dataFinalizacao.time}" pattern="dd/MM/yyyy" var="formattedDate"/>
+	<h3 class="teste">Alterar tarefa - ${tarefa.id}</h3>
 	
 	<form action="alteraTarefa" method="post">
 	<input type="hidden" name="id" value="${tarefa.id}"/>
@@ -18,7 +26,7 @@
 	
 	Finalizado? <input type="checkbox" name="finalizado" value="true" ${tarefa.finalizado? 'checked' : ''}/><br/>
 	Data de finalização: <br/>
-	<input type="text" name="dataFinalizacao" value="<fmt:formatDate value="${tarefa.dataFinalizacao.time}" pattern="dd/MM/yyyy"/>"/>
+	<caelum:campoData id="dataFinalizacao" value="${formattedDate}"/>
 	<br/>
 	
 	<input type="submit" value="Alterar"/>
