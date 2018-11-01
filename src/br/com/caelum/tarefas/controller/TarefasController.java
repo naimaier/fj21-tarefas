@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.caelum.tarefas.dao.JdbcTarefaDao;
 import br.com.caelum.tarefas.jdbc.ConnectionFactory;
@@ -63,12 +62,15 @@ public class TarefasController {
 		return "redirect:listaTarefas";
 	}
 	
+	/*
 	// Tudo que for retornado, será o corpo da nossa resposta.
 	//Ou se nada for retornado, então a resposta será vazia porém o status HTTP será 200.
-	@ResponseBody
+	@ResponseBody */
 	@RequestMapping("finalizaTarefa")
-	public void finaliza(Long id) {
+	public String finaliza(Long id, Model model) {
 		JdbcTarefaDao dao = new JdbcTarefaDao(connection);
 		dao.finaliza(id);
+		model.addAttribute("tarefa", dao.getTarefa(id));
+		return "tarefa/finalizada";
 	}
 }
