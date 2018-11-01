@@ -16,7 +16,7 @@
 </head>
 <body>
 	<fmt:formatDate value="${tarefa.dataFinalizacao.time}" pattern="dd/MM/yyyy" var="formattedDate"/>
-	<h3 class="teste">Alterar tarefa - ${tarefa.id}</h3>
+	<h3>Alterar tarefa - ${tarefa.id}</h3>
 	
 	<form action="alteraTarefa" method="post">
 	<input type="hidden" name="id" value="${tarefa.id}"/>

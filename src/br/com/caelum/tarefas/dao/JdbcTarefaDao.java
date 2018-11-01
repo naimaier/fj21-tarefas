@@ -118,6 +118,20 @@ public class JdbcTarefaDao {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public void finaliza(Long id) {
+		String sql = "update tarefas set finalizado=true,dataFinalizacao=? where id=?";
+
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setDate(1, new Date(Calendar.getInstance().getTimeInMillis()));
+			stmt.setLong(2, id);
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public void remove(Tarefa tarefa) {
 		try {
