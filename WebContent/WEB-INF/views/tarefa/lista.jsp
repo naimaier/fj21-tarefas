@@ -33,7 +33,7 @@
 				<td>${tarefa.descricao}</td>
 				<c:if test="${tarefa.finalizado eq false}">
 					<td id="tarefa_${tarefa.id}">
-              			<a href="#" onClick="finalizaAgora(${tarefa.id})">
+              			<a href="#" onclick="finalizaAgora(${tarefa.id})">
                   			Finaliza agora!
               			</a>
           			</td>
@@ -45,6 +45,7 @@
 						pattern="dd/MM/yyyy" />
 				<td><a href="mostraTarefa?id=${tarefa.id}">Alterar</a></td>
 				<td><a href="removeTarefa?id=${tarefa.id}">Remover</a></td>
+				<td><a href="#" onclick="removeTarefa(${tarefa.id})">Remover (Ajax)</a></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -56,6 +57,13 @@
               // ID e alterando o HTML dele 
               $("#tarefa_"+id).html("Finalizado");
           });
+      }
+      
+      function removeTarefa(id) {
+    	  var object = event.target;
+    	  $.post("removeTarefa", {'id' : id}, function() {
+    		$(object).closest("tr").hide();  
+    	  });
       }
 	</script>
   
