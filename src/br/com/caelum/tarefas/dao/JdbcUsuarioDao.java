@@ -16,12 +16,13 @@ public class JdbcUsuarioDao {
 	}
 	
 	public boolean existeUsuario(Usuario usuario) {
-		String sql = "select * from usuarios where login=?";
+		String sql = "select * from usuarios where login=? and senha=?";
 		boolean existe = false;
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, usuario.getLogin());
+			stmt.setString(2, usuario.getSenha());
 			ResultSet rs=  stmt.executeQuery();
 			existe = rs.next();
 			
