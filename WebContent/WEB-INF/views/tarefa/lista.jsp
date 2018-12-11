@@ -12,7 +12,7 @@
 <link href="resources/css/jquery-ui.css" rel="stylesheet">
 <link href="resources/css/jquery-ui.structure.css" rel="stylesheet">
 <link href="resources/css/jquery-ui.theme.css" rel="stylesheet">
-
+<link type="text/css" href="resources/css/tarefas.css" rel="stylesheet"/>
 </head>
 <body>
 	

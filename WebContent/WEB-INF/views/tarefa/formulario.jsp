@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link type="text/css" href="resources/css/tarefas.css" rel="stylesheet"/>
 </head>
 <body>
 	<h3>Adicionar tarefas</h3>

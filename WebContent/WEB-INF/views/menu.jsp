@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link type="text/css" href="resources/css/tarefas.css" rel="stylesheet"/>
 </head>
 <body>
 	<h2>Página inicial da Lista de Tarefas</h2>

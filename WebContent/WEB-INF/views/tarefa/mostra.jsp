@@ -13,6 +13,7 @@
 <link href="resources/css/jquery-ui.css" rel="stylesheet">
 <link href="resources/css/jquery-ui.structure.css" rel="stylesheet">
 <link href="resources/css/jquery-ui.theme.css" rel="stylesheet">
+<link type="text/css" href="resources/css/tarefas.css" rel="stylesheet"/>
 </head>
 <body>
 	<fmt:formatDate value="${tarefa.dataFinalizacao.time}" pattern="dd/MM/yyyy" var="formattedDate"/>
